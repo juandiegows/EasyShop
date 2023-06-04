@@ -68,6 +68,10 @@ class MainActivity : AppCompatActivity() {
             btnAgregar.setOnClickListener {
                 Save()
             }
+
+            btnLogo.setOnClickListener {
+                startActivity(Intent(this@MainActivity, PerfilActivity::class.java))
+            }
             rbQuincenalShow.setOnCheckedChangeListener { buttonView, isChecked ->
                 if (isChecked) {
                     txtTitle.text = "Lista de compra Quincenal"

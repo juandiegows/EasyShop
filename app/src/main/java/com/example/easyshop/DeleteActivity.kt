@@ -42,9 +42,12 @@ class DeleteActivity : AppCompatActivity() {
 
     private fun events() {
         binding.apply {
-          btnAtras.setOnClickListener {
-              onBackPressed()
-          }
+            btnLogo2.setOnClickListener {
+                startActivity(Intent(this@DeleteActivity, PerfilActivity::class.java))
+            }
+            btnAtras.setOnClickListener {
+                onBackPressed()
+            }
             rbQuincenalShow.setOnCheckedChangeListener { buttonView, isChecked ->
                 if (isChecked) {
                     txtTitle3.text = "Lista de compra Quincenal"

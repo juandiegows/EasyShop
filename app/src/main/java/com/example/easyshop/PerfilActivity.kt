@@ -1,10 +1,12 @@
 package com.example.easyshop
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.Display.Mode
 import android.view.View
 import android.widget.Toast
+import androidx.activity.OnBackPressedCallback
 import androidx.appcompat.app.AlertDialog
 import com.example.easyshop.databinding.ActivityPerfilBinding
 import com.example.easyshop.helper.IsValid
@@ -24,7 +26,35 @@ class PerfilActivity : AppCompatActivity() {
 
         binding.apply {
             btnAtras.setOnClickListener {
-                onBackPressed()
+                onBackPressedDispatcher.onBackPressed()
+            }
+            onBackPressedDispatcher.addCallback(
+                this@PerfilActivity,
+                object : OnBackPressedCallback(true) {
+                    override fun handleOnBackPressed() {
+                        AlertDialog.Builder(this@PerfilActivity)
+                            .setMessage("¿Desea salir?")
+                            .setPositiveButton("Si") { _, _ ->
+                                finish()
+
+                            }.setNegativeButton("No") { _, _ ->
+                                Toast.makeText(
+                                    this@PerfilActivity,
+                                    "se ha cancelado ",
+                                    Toast.LENGTH_SHORT
+                                )
+                                    .show()
+                            }.create().show()
+                        // No Longer Needs to Callback and Finish
+                    }
+                })
+            btnPrevia.setOnClickListener {
+                startActivity(Intent(this@PerfilActivity, PreviaActivity::class.java).apply {
+                    putExtra("nombre", txtName.text.toString())
+                    putExtra("apellido", txtLastName.text.toString())
+                    putExtra("celular", txtPhone.text.toString())
+                    putExtra("correo", txtEmail.text.toString())
+                })
             }
 
             btnGuardar.setOnClickListener {
@@ -44,18 +74,6 @@ class PerfilActivity : AppCompatActivity() {
         }
     }
 
-    override fun onBackPressed() {
-        AlertDialog.Builder(this@PerfilActivity)
-            .setMessage("¿Desea salir?")
-            .setPositiveButton("Si") { _, _ ->
-                super.onBackPressed()
-
-            }.setNegativeButton("No") { _, _ ->
-                Toast.makeText(this@PerfilActivity, "se ha cancelado ", Toast.LENGTH_SHORT)
-                    .show()
-            }.create().show()
-
-    }
 
     private fun Init() {
         binding.apply {

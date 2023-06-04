@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import android.widget.Toast
+import androidx.activity.OnBackPressedCallback
 import androidx.appcompat.app.AlertDialog
 import androidx.core.text.isDigitsOnly
 import com.example.easyshop.databinding.ActivityDeleteBinding
@@ -27,26 +28,35 @@ class DeleteActivity : AppCompatActivity() {
     }
 
 
-    override fun onBackPressed() {
-        AlertDialog.Builder(this@DeleteActivity)
-            .setMessage("¿Desea salir?")
-            .setPositiveButton("Si") { _, _ ->
-                super.onBackPressed()
-
-            }.setNegativeButton("No") { _, _ ->
-                Toast.makeText(this@DeleteActivity, "se ha cancelado ", Toast.LENGTH_SHORT)
-                    .show()
-            }.create().show()
-
-    }
 
     private fun events() {
+
+        onBackPressedDispatcher.addCallback(
+            this@DeleteActivity,
+            object : OnBackPressedCallback(true) {
+                override fun handleOnBackPressed() {
+                    AlertDialog.Builder(this@DeleteActivity)
+                        .setMessage("¿Desea salir?")
+                        .setPositiveButton("Si") { _, _ ->
+                            finish()
+
+                        }.setNegativeButton("No") { _, _ ->
+                            Toast.makeText(
+                                this@DeleteActivity,
+                                "se ha cancelado ",
+                                Toast.LENGTH_SHORT
+                            )
+                                .show()
+                        }.create().show()
+                    // No Longer Needs to Callback and Finish
+                }
+            })
         binding.apply {
             btnLogo2.setOnClickListener {
                 startActivity(Intent(this@DeleteActivity, PerfilActivity::class.java))
             }
             btnAtras.setOnClickListener {
-                onBackPressed()
+                onBackPressedDispatcher.onBackPressed()
             }
             rbQuincenalShow.setOnCheckedChangeListener { buttonView, isChecked ->
                 if (isChecked) {

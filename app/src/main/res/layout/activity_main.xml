@@ -9,6 +9,44 @@
     app:flow_verticalGap="10dp"
     tools:context=".MainActivity">
 
+    <RadioGroup
+        android:id="@+id/radioGroupShow"
+        android:layout_width="362dp"
+        android:layout_height="71dp"
+        android:layout_marginStart="32dp"
+        android:layout_marginEnd="32dp"
+        android:layout_marginBottom="20dp"
+        android:gravity="center"
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toTopOf="@+id/btnEliminar"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent">
+
+        <RadioButton
+            android:id="@+id/rbQuincenalShow"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:backgroundTint="#FFFFFF"
+            android:checked="true"
+            android:paddingStart="5dp"
+            android:paddingEnd="5dp"
+            android:text="Quincenal"
+            android:textColor="@color/white"
+            android:textColorHint="@color/white"
+            app:useMaterialThemeColors="true" />
+
+        <RadioButton
+            android:id="@+id/rbMensualShow"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:paddingStart="5dp"
+            android:paddingEnd="5dp"
+            android:text="Mensual"
+            android:textColor="@color/white" />
+    </RadioGroup>
+
     <ImageView
         android:id="@+id/btnLogo"
         android:layout_width="60dp"
@@ -37,6 +75,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:backgroundTint="#FFFFFF"
+            android:checked="true"
             android:paddingStart="5dp"
             android:paddingEnd="5dp"
             android:text="Quincenal"
@@ -109,13 +148,13 @@
         app:layout_constraintStart_toStartOf="parent" />
 
     <ScrollView
+        android:id="@+id/scrollView2"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginStart="32dp"
         android:layout_marginTop="16dp"
         android:layout_marginEnd="32dp"
-        android:layout_marginBottom="16dp"
-        app:layout_constraintBottom_toTopOf="@+id/btnEliminar"
+        app:layout_constraintBottom_toTopOf="@+id/radioGroupShow"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/txtTitle">

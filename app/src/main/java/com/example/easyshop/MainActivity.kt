@@ -1,5 +1,6 @@
 package com.example.easyshop
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
@@ -76,44 +77,52 @@ class MainActivity : AppCompatActivity() {
                     LlenarMensual()
                 }
             }
+            btnEliminar.setOnClickListener {
+                startActivity(Intent(this@MainActivity, DeleteActivity::class.java))
+            }
         }
     }
 
-    private fun ActivityMainBinding.Save() {
-        if (controlsValidar.IsValid()) {
-            if (rbQuincenal.isChecked) {
-                listaQuincenal.add(txtItem.text.toString())
-                getSharedPreferences("db", MODE_PRIVATE).edit()
-                    .putString(
-                        getString(R.string.quincenal),
-                        listaQuincenal.joinToString("\n")
-                    )
-                    .apply()
-                rbQuincenalShow.isChecked = true
-                LlenarQuincenal()
-                txtItem.setText("")
-                Toast.makeText(
-                    this@MainActivity,
-                    "Se agregado correctamen el item quincenal",
-                    Toast.LENGTH_LONG
-                ).show()
-            } else {
-                listaMensual.add(txtItem.text.toString())
-                getSharedPreferences("db", MODE_PRIVATE).edit()
-                    .putString(
-                        getString(R.string.mensual),
-                        listaMensual.joinToString("\n")
-                    )
-                    .apply()
-                rbMensualShow.isChecked = true
-                LlenarMensual()
-                txtItem.setText("")
-                txtItem.clearFocus()
-                Toast.makeText(
-                    this@MainActivity,
-                    "Se agregado correctamen el item mensual",
-                    Toast.LENGTH_LONG
-                ).show()
+
+    private fun Save() {
+        binding.apply {
+
+
+            if (controlsValidar.IsValid()) {
+                if (rbQuincenal.isChecked) {
+                    listaQuincenal.add(txtItem.text.toString())
+                    getSharedPreferences("db", MODE_PRIVATE).edit()
+                        .putString(
+                            getString(R.string.quincenal),
+                            listaQuincenal.joinToString("\n")
+                        )
+                        .apply()
+                    rbQuincenalShow.isChecked = true
+                    LlenarQuincenal()
+                    txtItem.setText("")
+                    Toast.makeText(
+                        this@MainActivity,
+                        "Se agregado correctamen el item quincenal",
+                        Toast.LENGTH_LONG
+                    ).show()
+                } else {
+                    listaMensual.add(txtItem.text.toString())
+                    getSharedPreferences("db", MODE_PRIVATE).edit()
+                        .putString(
+                            getString(R.string.mensual),
+                            listaMensual.joinToString("\n")
+                        )
+                        .apply()
+                    rbMensualShow.isChecked = true
+                    LlenarMensual()
+                    txtItem.setText("")
+                    txtItem.clearFocus()
+                    Toast.makeText(
+                        this@MainActivity,
+                        "Se agregado correctamen el item mensual",
+                        Toast.LENGTH_LONG
+                    ).show()
+                }
             }
         }
     }

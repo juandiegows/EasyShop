@@ -12,6 +12,10 @@
         <item name="android:background">@drawable/btn_custom</item>
         <item name="backgroundTint">@color/btn_custom</item>
     </style>
+   <style name="btn_custom_left" parent="Widget.Material3.Button">
+        <item name="android:background">@drawable/btn_custom_left</item>
+        <item name="backgroundTint">@color/btn_custom</item>
+    </style>
 
     <style name="btn_custom_red" parent="btn_custom">
          <item name="backgroundTint">@color/btn_custom_red</item>
